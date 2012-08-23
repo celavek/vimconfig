@@ -236,9 +236,9 @@ map <C-]> :100vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 " clang_complete
 " --------------------
 " Complete options (disable preview scratch window)
-set completeopt = menu,menuone,longest
+set completeopt=menu,menuone,longest
 " Limit popup menu height
-set pumheight = 20
+set pumheight=20
 
 "  original plugin settings BEGIN
 "let g:clang_user_options = '|| exit 0'
@@ -256,9 +256,9 @@ let g:clang_complete_auto=0
 let g:clang_complete_copen=1
 let g:clang_hl_errors=1
 let g:clang_periodic_quickfix=0
-"let g:clang_snippets=1
-"let g:clang_snippets_engine="clang_complete"
-"let g:clang_conceal_snippets=1
+let g:clang_snippets=1
+let g:clang_snippets_engine="clang_complete"
+let g:clang_conceal_snippets=1
 let g:clang_exec="clang"
 let g:clang_user_options=""
 let g:clang_auto_user_options=".clang_complete"
@@ -267,13 +267,15 @@ let g:clang_library_path="/usr/local/lib"
 let g:clang_sort_algo="priority"
 let g:clang_complete_macros=1
 let g:clang_complete_patterns=0
+
 let mapleader = ","
 nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
 
-"let g:clic_filename="/path/to/index.db"
-"nnoremap <Leader>r :call ClangGetReferences()<CR>
-"nnoremap <Leader>d :call ClangGetDeclarations()<CR>
-"nnoremap <Leader>s :call ClangGetSubclasses()<CR>
+" the path needs to be setup accrodingly
+let g:clic_filename="/path/to/index.db"
+nnoremap <Leader>r :call ClangGetReferences()<CR>
+nnoremap <Leader>d :call ClangGetDeclarations()<CR>
+nnoremap <Leader>s :call ClangGetSubclasses()<CR>
 " modified plugin settings END
 
 " --------------------
