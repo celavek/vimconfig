@@ -21,3 +21,16 @@ Add submodule e.g.:
     git add .
     git commit -m "Install Fugitive.vim bundle as a submodule."
 
+Upgrade a plugin bundle:
+
+    cd ~/.vim/bundle/fugitive
+    git pull origin master
+
+Upgrade all bundles:
+
+    git submodule foreach git pull origin master
+
+Avoid dirtying submodule's tree:
+
+    Generating helptags with pathogen's ":Helptags" dirties the submodules repos.
+    Solution to that is to add ignore = dirty in ".gitmodules" for each submodule.
