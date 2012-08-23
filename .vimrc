@@ -9,8 +9,8 @@
 "runtime bundle/vim-pathogen/autoload/pathogen.vim
 "runtime bundle/clang_complete/autoload/clang_complete.vim
 call pathogen#infect()
-call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
 " Set 'nocompatible' to ward off unexpected things that your distro might
 " have made, as well as sanely reset options when re-sourcing .vimrc
