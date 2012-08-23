@@ -1,6 +1,6 @@
 Installation:
 
-    git clone git://github.com/nelstrom/dotvim.git ~/.vim
+    git clone git://github.com/celavek/vimconfig.git ~/.vim
 
 Create symlinks:
 
@@ -13,7 +13,7 @@ Switch to the `~/.vim` directory, and fetch submodules:
     git submodule init
     git submodule update
 
-Add submodule:
+Add submodule e.g.:
 
     cd ~/.vim
     mkdir ~/.vim/bundle
