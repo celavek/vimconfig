@@ -6,8 +6,7 @@
 " no user should have to live without.
 
 " enable the pathogen plugin 
-"runtime bundle/vim-pathogen/autoload/pathogen.vim
-"runtime bundle/clang_complete/autoload/clang_complete.vim
+runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
