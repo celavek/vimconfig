@@ -23,7 +23,6 @@ filetype indent plugin on
 " Enable syntax highlighting
 syntax on
 
-
 "------------------------------------------------------------
 " Must have options {{{1
 "
@@ -105,7 +104,7 @@ set t_vb=
 
 " Set the command window height to 2 lines, to avoid many cases of having to
 " "press <Enter> to continue"
-set cmdheight=2
+set cmdheight=4
 
 " Display line numbers on the left
 set number
@@ -116,10 +115,13 @@ set notimeout ttimeout ttimeoutlen=200
 " Use <F11> to toggle between 'paste' and 'nopaste'
 set pastetoggle=<F11>
 
-
 "text length options
 set textwidth=80
 set colorcolumn=+1
+
+"font settings
+set guifont=Inconsolata:h10
+
 
 "------------------------------------------------------------
 " Indentation options {{{1
@@ -132,6 +134,23 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set noexpandtab
+
+function! SetKernelTabs()
+	set tabstop=8 
+	set shiftwidth=8 
+	set softtabstop=8 
+	set noexpandtab
+endfunction
+
+function! SetDefaultTabs()
+	set tabstop=4
+	set shiftwidth=4
+	set softtabstop=4
+	set noexpandtab
+endfunction
+
+autocmd BufNewFile,BufEnter *.{c},*.{h} call SetKernelTabs()
+autocmd BufLeave *.{c},*.{h} call SetDefaultTabs()
 
 " Indentation settings for using hard tabs for indent. Display tabs as
 " two characters wide.
@@ -170,6 +189,9 @@ match ExtraWhitespace /\t\+/
 
 " set the color scheme
 colorscheme desert256
+
+" ditaa support
+au BufRead,BufNewFile *.ditaa set ft=ditaa
 
 "------------------------------------------------------------
 " Mappings {{{1
