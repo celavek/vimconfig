@@ -26,3 +26,6 @@
 	path = bundle/colorschemes
 	url = https://github.com/celavek/vim_colors.git
 	ignore = dirty
+[submodule "bundle/riv"]
+	path = bundle/riv
+	url = https://github.com/Rykka/riv.vim
