@@ -29,3 +29,4 @@
 [submodule "bundle/riv"]
 	path = bundle/riv
 	url = https://github.com/Rykka/riv.vim
+	ignore = dirty
