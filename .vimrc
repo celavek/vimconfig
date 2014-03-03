@@ -1,27 +1,58 @@
 " Vim config file based on http://vim.wikia.com/wiki/Example_vimrc
 "------------------------------------------------------------
-" Features {{{1
-"
-" These options and commands enable some very useful features in Vim, that
-" no user should have to live without.
-
-" enable the pathogen plugin 
-runtime bundle/pathogen/autoload/pathogen.vim
-call pathogen#infect()
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-
 " Set 'nocompatible' to ward off unexpected things that your distro might
 " have made, as well as sanely reset options when re-sourcing .vimrc
 set nocompatible
 
+" pathogen
+let g:pathogen_disabled = []
+
+if !has("python")
+    call add(g:pathogen_disabled, 'python-mode')
+    call add(g:pathogen_disabled, 'vim-django')
+endif
+
+runtime bundle/pathogen/autoload/pathogen.vim
+call pathogen#infect()
+call pathogen#incubate()
+call pathogen#helptags()
+
 " Attempt to determine the type of a file based on its name and possibly its
 " contents.  Use this to allow intelligent auto-indenting for each filetype,
 " and for plugins that are filetype specific.
-filetype indent plugin on
+filetype plugin indent on
 
 " Enable syntax highlighting
 syntax on
+
+" status line configuration
+function! FileSize()
+    let bytes = getfsize(expand("%:p"))
+    if bytes <= 0
+        return ""
+    endif
+    if bytes < 1024
+        return bytes . "b"
+    else
+        return (bytes / 1024) . "k"
+    endif
+endfunction
+
+set ls=2
+set statusline= " completely reset statusline
+set statusline+=%f\ " relative path of the file
+set statusline+=%1*%m%r%*\ \ " modified flag and read only flag
+set statusline+=[Buf:\ #%n/%{winnr()}]\ " buffer number
+set statusline+=%{FileSize()}\ " filesize
+set statusline+=[Line:\ %l/%L\ " cursor line/total lines(percent)
+set statusline+=Col:\ %c] " cursor column
+set statusline+=%= " left/right separator
+set statusline+=[%{&wrap?'wrap':'nowrap'}, " wrap state
+set statusline+=%{&expandtab?'spaces':'tabs'}:%{&tabstop}]\ " expand tab and tab stop info
+set statusline+=[%{strlen(&filetype)?&filetype:'none'}, " filetype
+set statusline+=%{strlen(&fenc)?&fenc:'none'}, " file encoding
+set statusline+=%{&ff}] " file format
+set statusline+=\ %P " percent through file
 
 "------------------------------------------------------------
 " Must have options {{{1
@@ -116,11 +147,11 @@ set notimeout ttimeout ttimeoutlen=200
 set pastetoggle=<F11>
 
 "text length options
-set textwidth=80
+set textwidth=120
 set colorcolumn=+1
 
 "font settings
-set guifont=Inconsolata:h10
+set guifont=Inconsolata:h11
 
 
 "------------------------------------------------------------
@@ -136,9 +167,9 @@ set softtabstop=4
 set noexpandtab
 
 function! SetKernelTabs()
-	set tabstop=8 
-	set shiftwidth=8 
-	set softtabstop=8 
+	set tabstop=8
+	set shiftwidth=8
+	set softtabstop=8
 	set noexpandtab
 endfunction
 
@@ -215,7 +246,7 @@ nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 " let g:miniBufExplMapWindowNavVim = 1
 " let g:miniBufExplMapWindowNavArrows = 1
 " let g:miniBufExplMapCTabSwitchBufs = 1
-" let g:miniBufExplModSelTarget = 1 
+" let g:miniBufExplModSelTarget = 1
 "------------------------------------------------------------
 "
 " --------------------
@@ -231,74 +262,6 @@ nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 " highlight ShowMarksHLo gui=bold guibg=LightYellow guifg=DarkYellow
 " For multiple marks on the same line.
 " highlight ShowMarksHLm gui=bold guibg=LightGreen guifg=DarkGreen
-
-
-" --------------------
-" ctags
-" --------------------
-" configure tags - add additional tags here or comment out not-used ones
-" some system wide tags
-set tags+=~/.vim/tags/iisuSDK_3.5
-set tags+=~/.vim/tags/jvec
-set tags+=~/.vim/tags/arm_deps
-set tags+=~/.vim/tags/android_deps
-" set tags+=~/.vim/tags/x86_deps
-
-" for current directory
-set tags+=./tags;/
-
-" build tags of your own project with Ctrl-F12
-map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-" map Alt-] to open definition in new tab
-map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-" map Alt+\ to open the definition in a vertical split
-map <C-]> :100vsp <CR>:exec("tag ".expand("<cword>"))<CR>
-
-" --------------------
-" clang_complete
-" --------------------
-" Complete options (disable preview scratch window)
-set completeopt=menu,menuone,longest
-" Limit popup menu height
-set pumheight=20
-
-"  original plugin settings BEGIN
-"let g:clang_user_options = '|| exit 0'
-"let g:clang_complete_auto = 1
-"let g:clang_complete_copen = 1
-"let g:clang_periodic_quickfix = 1
-"let g:clang_use_library = 1
-"let g:clang_library_path = "/usr/local/lib"
-" original plugin settings END
-" modified plugin settings BEGIN
-let g:clang_debug=1
-let g:clang_user_options='|| exit 0'
-let g:clang_auto_select=1
-let g:clang_complete_auto=0
-let g:clang_complete_copen=1
-let g:clang_hl_errors=1
-let g:clang_periodic_quickfix=0
-let g:clang_snippets=1
-let g:clang_snippets_engine="clang_complete"
-let g:clang_conceal_snippets=1
-let g:clang_exec="clang"
-let g:clang_user_options=""
-let g:clang_auto_user_options=".clang_complete"
-let g:clang_use_library=1
-let g:clang_library_path="/usr/local/lib"
-let g:clang_sort_algo="priority"
-let g:clang_complete_macros=1
-let g:clang_complete_patterns=0
-
-let mapleader = ","
-nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
-
-" the path needs to be setup accrodingly
-let g:clic_filename="/path/to/index.db"
-nnoremap <Leader>r :call ClangGetReferences()<CR>
-nnoremap <Leader>d :call ClangGetDeclarations()<CR>
-nnoremap <Leader>s :call ClangGetSubclasses()<CR>
-" modified plugin settings END
 
 " --------------------
 " TagList
@@ -320,7 +283,7 @@ let Tlist_Show_One_File = 1 " Displaying tags for only one file~
 let Tlist_Exit_OnlyWindow = 1 " if you are the last, kill yourself
 let Tlist_Use_Right_Window = 1 " split to the right side of the screen
 let Tlist_Sort_Type = "order" " sort by order or name
-let Tlist_Display_Prototype = 0 " do not show prototypes and not tags in the taglist window.                     
+let Tlist_Display_Prototype = 0 " do not show prototypes and not tags in the taglist window.
 let Tlist_Compact_Format = 1 " Remove extra information and blank lines from the taglist window.
 let Tlist_GainFocus_On_ToggleOpen = 1 " Jump to taglist window on open.
 let Tlist_Display_Tag_Scope = 1 " Show tag scope next to the tag name.
@@ -329,3 +292,8 @@ let Tlist_Enable_Fold_Column = 0 " Don't Show the fold indicator column in the t
 let Tlist_WinWidth = 40
 " let Tlist_Ctags_Cmd = 'ctags --c++-kinds=+p --fields=+iaS --extra=+q --languages=c++'
 
+" ----------------
+" Riv
+" ----------------
+let g:riv_auto_format_table = 0
+let g:riv_fold_auto_update = 0
