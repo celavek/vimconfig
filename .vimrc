@@ -14,7 +14,7 @@ endif
 
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
-call pathogen#incubate()
+"call pathogen#incubate()
 call pathogen#helptags()
 
 " Attempt to determine the type of a file based on its name and possibly its
@@ -161,10 +161,12 @@ set guifont=Inconsolata:h11
 
 " Indentation settings for using 4 spaces instead of tabs.
 " Do not change 'tabstop' from its default value of 8 with this setup.
+set noexpandtab
+set copyindent
+set preserveindent
 set tabstop=4
 set shiftwidth=4
-set softtabstop=4
-set noexpandtab
+set softtabstop=0
 
 function! SetKernelTabs()
 	set tabstop=8
@@ -180,8 +182,8 @@ function! SetDefaultTabs()
 	set noexpandtab
 endfunction
 
-autocmd BufNewFile,BufEnter *.{c},*.{h} call SetKernelTabs()
-autocmd BufLeave *.{c},*.{h} call SetDefaultTabs()
+"autocmd BufNewFile,BufEnter *.{c},*.{h} call SetKernelTabs()
+"autocmd BufLeave *.{c},*.{h} call SetDefaultTabs()
 
 " Indentation settings for using hard tabs for indent. Display tabs as
 " two characters wide.
@@ -189,34 +191,62 @@ autocmd BufLeave *.{c},*.{h} call SetDefaultTabs()
 "set tabstop=2
 
 " clever tabs (tabs only on the line beginning) BEGIN
-"function! CleverTabs(shiftwidth)
-"    let line = getline('.')[:col('.')-2]
-"    if col('.') == 1 || line =~ '^\t*$' || line =~ '^$'
-"    let z = "\t"
-"    else
-"    let space = ""
-"    let shiftwidth = a:shiftwidth
-"    let shiftwidth = shiftwidth - ((virtcol('.')-1) % shiftwidth)
+function! CleverTabs(shiftwidth)
+    let line = getline('.')[:col('.')-2]
+    if col('.') == 1 || line =~ '^\t*$' || line =~ '^$'
+    let z = "\t"
+    else
+    let space = ""
+    let shiftwidth = a:shiftwidth
+    let shiftwidth = shiftwidth - ((virtcol('.')-1) % shiftwidth)
 
-"    while shiftwidth > 0
-"    let shiftwidth = shiftwidth - 1
-"    let space = space . ' '
-"    endwhile
+    while shiftwidth > 0
+    let shiftwidth = shiftwidth - 1
+    let space = space . ' '
+    endwhile
 
-"    let z = space
-"    endif
+    let z = space
+    endif
 
-"    return z
-"endfunction "CleverTabs
-
+    return z
+endfunction "CleverTabs
 " map tab key to function
-"imap <silent> <Tab> <C-r>=CleverTabs(4)<cr>
+imap <silent> <Tab> <C-r>=CleverTabs(4)<cr>
+
+" build script invocation
+function! BuildCurrent(...)
+	let wd = getcwd()
+	let b_args = a:000
+	let script_args = ""
+	if empty(b_args)
+		let script_args = "Linux x86_64 clang Release"
+	else
+		let script_args = join(b_args)
+	endif
+	silent !clear
+	echom wd
+	echom script_args
+	let l:command = '! ./build.sh ' . script_args
+	let l:out = system(l:command)
+	cexpr l:out
+	caddexpr ""
+	cwindow
+endfunction "BuildCurrent
+	        
+map <F7> :call BuildCurrent()<CR>
+imap <F7> :call BuildCurrent()<CR>
+
+autocmd FileType qf wincmd L
 
 " highlight tabs in code
 highlight ExtraWhitespace ctermbg=06
 match ExtraWhitespace /\t\+/
 
 " clever tabs END
+
+" clang format
+map <C-K> :pyf /home/mac/bin/clang-format.py<cr>
+imap <C-K> <c-o>:pyf /home/mac/bin/clang-format.py<cr>
 
 " set the color scheme
 colorscheme desert256
@@ -297,3 +327,14 @@ let Tlist_WinWidth = 40
 " ----------------
 let g:riv_auto_format_table = 0
 let g:riv_fold_auto_update = 0
+
+" ------------------
+" Split navigation
+" ------------------
+
+" Use ctrl-[hjkl] to select the active split!
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
+
