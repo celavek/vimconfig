@@ -338,3 +338,8 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
+"-------------
+" Markdown
+"-------------
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
