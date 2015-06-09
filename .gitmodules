@@ -18,10 +18,6 @@
 	path = bundle/scroll_colors
 	url = https://github.com/vim-scripts/ScrollColors.git
 	ignore = dirty
-[submodule "bundle/clang_complete"]
-	path = bundle/clang_complete
-	url = https://github.com/exclipy/clang_complete.git
-	ignore = dirty
 [submodule "bundle/colorschemes"]
 	path = bundle/colorschemes
 	url = https://github.com/celavek/vim_colors.git
