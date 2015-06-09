@@ -236,7 +236,7 @@ endfunction "BuildCurrent
 map <F7> :call BuildCurrent()<CR>
 imap <F7> :call BuildCurrent()<CR>
 
-autocmd FileType qf wincmd L
+"autocmd FileType qf wincmd L
 
 " highlight tabs in code
 highlight ExtraWhitespace ctermbg=06
