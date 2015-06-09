@@ -59,6 +59,7 @@ set statusline+=\ %P " percent through file
 "
 " These are highly recommended options.
 
+/thogen:.+_install.*/
 " One of the most important options to activate. Allows you to switch from an
 " unsaved buffer without saving it first. Also allows you to keep an undo
 " history for multiple files. Vim will complain if you try to quit without
@@ -342,4 +343,9 @@ nmap <silent> <c-l> :wincmd l<CR>
 " Markdown
 "-------------
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+"-------
+" YCM
+"-------
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
