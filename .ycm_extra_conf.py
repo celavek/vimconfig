@@ -26,9 +26,8 @@ flags = [
     '-x', 'c++',
     # This path will only work on OS X, but extra paths that don't exist are not
     # harmful
-    '-isystem', '/System/Library/Frameworks/Python.framework/Headers',
     '-isystem', '/usr/local/include',
-    '-isystem', '/usr/local/include/eigen3',
+    '-isystem', '/usr/include/',
     '-I', 'include'
     '-I.'
 ]
