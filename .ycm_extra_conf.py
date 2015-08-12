@@ -28,7 +28,10 @@ flags = [
     # harmful
     '-isystem', '/usr/local/include',
     '-isystem', '/usr/include/',
-    '-I', 'include'
+    '-I', 'include/**',
+    '-I', 'src/include/**',
+    '-I', 'dependencies/**',
+    '-I', 'sources/include/**'
     '-I.'
 ]
 
