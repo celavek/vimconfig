@@ -29,12 +29,20 @@
 [submodule "bundle/markdown"]
 	path = bundle/markdown
 	url = https://github.com/tpope/vim-markdown.git
+	ignore = dirty
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+	ignore = dirty
 [submodule "bundle/IngoLibrary"]
 	path = bundle/IngoLibrary
 	url = https://github.com/vim-scripts/ingo-library.git
+	ignore = dirty
 [submodule "bundle/SyntaxRange"]
 	path = bundle/SyntaxRange
 	url = https://github.com/vim-scripts/SyntaxRange.git
+	ignore = dirty
+[submodule "bundle/bundle/lawrencium"]
+	path = bundle/bundle/lawrencium
+	url = https://github.com/ludovicchabant/vim-lawrencium.git
+	ignore = dirty
