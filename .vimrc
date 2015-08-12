@@ -348,6 +348,10 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 "-------
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_min_num_identifier_candidate_chars = 3
+let g:ycm_warning_symbol = '^^'
+let g:ycm_server_keep_logfiles = 0
 
 "------------
 " SyntaxRange
