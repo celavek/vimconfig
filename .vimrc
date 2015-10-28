@@ -14,7 +14,6 @@ endif
 
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
-"call pathogen#incubate()
 call pathogen#helptags()
 
 " Attempt to determine the type of a file based on its name and possibly its
@@ -38,21 +37,21 @@ function! FileSize()
     endif
 endfunction
 
-set ls=2
-set statusline= " completely reset statusline
-set statusline+=%f\ " relative path of the file
-set statusline+=%1*%m%r%*\ \ " modified flag and read only flag
-set statusline+=[Buf:\ #%n/%{winnr()}]\ " buffer number
-set statusline+=%{FileSize()}\ " filesize
-set statusline+=[Line:\ %l/%L\ " cursor line/total lines(percent)
-set statusline+=Col:\ %c] " cursor column
-set statusline+=%= " left/right separator
-set statusline+=[%{&wrap?'wrap':'nowrap'}, " wrap state
-set statusline+=%{&expandtab?'spaces':'tabs'}:%{&tabstop}]\ " expand tab and tab stop info
-set statusline+=[%{strlen(&filetype)?&filetype:'none'}, " filetype
-set statusline+=%{strlen(&fenc)?&fenc:'none'}, " file encoding
-set statusline+=%{&ff}] " file format
-set statusline+=\ %P " percent through file
+"set ls=2
+"set statusline= " completely reset statusline
+"set statusline+=%f\ " relative path of the file
+"set statusline+=%1*%m%r%*\ \ " modified flag and read only flag
+"set statusline+=[Buf:\ #%n/%{winnr()}]\ " buffer number
+"set statusline+=%{FileSize()}\ " filesize
+"set statusline+=[Line:\ %l/%L\ " cursor line/total lines(percent)
+"set statusline+=Col:\ %c] " cursor column
+"set statusline+=%= " left/right separator
+"set statusline+=[%{&wrap?'wrap':'nowrap'}, " wrap state
+"set statusline+=%{&expandtab?'spaces':'tabs'}:%{&tabstop}]\ " expand tab and tab stop info
+"set statusline+=[%{strlen(&filetype)?&filetype:'none'}, " filetype
+"set statusline+=%{strlen(&fenc)?&fenc:'none'}, " file encoding
+"set statusline+=%{&ff}] " file format
+"set statusline+=\ %P " percent through file
 
 "------------------------------------------------------------
 " Must have options {{{1
@@ -151,7 +150,8 @@ set textwidth=120
 set colorcolumn=+1
 
 "font settings
-set guifont=Inconsolata:h11
+"set guifont=Inconsolata:h11
+set guifont=Hack:h10
 
 
 "------------------------------------------------------------
@@ -161,6 +161,8 @@ set guifont=Inconsolata:h11
 
 " Indentation settings for using 4 spaces instead of tabs.
 " Do not change 'tabstop' from its default value of 8 with this setup.
+
+" defaults
 set noexpandtab
 set copyindent
 set preserveindent
@@ -168,6 +170,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=0
 
+"kernel devel
 function! SetKernelTabs()
 	set tabstop=8
 	set shiftwidth=8
@@ -175,11 +178,20 @@ function! SetKernelTabs()
 	set noexpandtab
 endfunction
 
+"SK devel
 function! SetDefaultTabs()
 	set tabstop=4
 	set shiftwidth=4
 	set softtabstop=4
 	set noexpandtab
+endfunction
+
+"DSSDK devel
+function! SetDSTabs()
+	set expandtab
+	set tabstop=4
+	set shiftwidth=4
+	set softtabstop=4
 endfunction
 
 "autocmd BufNewFile,BufEnter *.{c},*.{h} call SetKernelTabs()
@@ -210,6 +222,7 @@ function! CleverTabs(shiftwidth)
 
     return z
 endfunction "CleverTabs
+
 " map tab key to function
 imap <silent> <Tab> <C-r>=CleverTabs(4)<cr>
 
@@ -232,7 +245,7 @@ function! BuildCurrent(...)
 	caddexpr ""
 	cwindow
 endfunction "BuildCurrent
-	        
+
 map <F7> :call BuildCurrent()<CR>
 imap <F7> :call BuildCurrent()<CR>
 
@@ -249,7 +262,9 @@ map <C-K> :pyf /home/mac/bin/clang-format.py<cr>
 imap <C-K> <c-o>:pyf /home/mac/bin/clang-format.py<cr>
 
 " set the color scheme
-colorscheme desert256
+set background=dark
+"colorscheme desert256
+colorscheme solarized
 
 " ditaa support
 au BufRead,BufNewFile *.ditaa set ft=ditaa
@@ -357,4 +372,40 @@ let g:ycm_server_keep_logfiles = 0
 " SyntaxRange
 "------------
 ":autocmd Syntax * call SyntaxRange#Include(...)
+
+"--------
+" airline
+"--------
+
+"file open tabs
+"enable/disable enhanced tabline.
+let g:airline#extensions#tabline#enabled = 1
+"enable/disable displaying buffers with a single tab.
+let g:airline#extensions#tabline#show_buffers = 1
+"enable/disable displaying tabs, regardless of number.
+let g:airline#extensions#tabline#show_tabs = 1
+" tab indexing and key mapping
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+
+"configure whether close button should be shown
+let g:airline#extensions#tabline#show_close_button = 1
+
+"configure symbol used to represent close button
+let g:airline#extensions#tabline#close_symbol = 'X'
+
+"whitespaces
+"enable/disable detection of whitespace errors.
+let g:airline#extensions#whitespace#enabled = 1
+
+"fonts
+let g:airline_powerline_fonts = 1
 
