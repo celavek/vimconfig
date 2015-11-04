@@ -42,8 +42,8 @@
 	path = bundle/SyntaxRange
 	url = https://github.com/vim-scripts/SyntaxRange.git
 	ignore = dirty
-[submodule "bundle/bundle/lawrencium"]
-	path = bundle/bundle/lawrencium
+[submodule "bundle/lawrencium"]
+	path = bundle/lawrencium
 	url = https://github.com/ludovicchabant/vim-lawrencium.git
 	ignore = dirty
 [submodule "bundle/vim-airline"]
@@ -54,3 +54,8 @@
 	path = bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
 	ignore = dirty
+[submodule "bundle/vim-sleuth"]
+	path = bundle/vim-sleuth
+	url = git://github.com/tpope/vim-sleuth.git
+	ignore = dirty
+
