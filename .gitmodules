@@ -42,8 +42,8 @@
 	path = bundle/SyntaxRange
 	url = https://github.com/vim-scripts/SyntaxRange.git
 	ignore = dirty
-[submodule "bundle/lawrencium"]
-	path = bundle/lawrencium
+[submodule "bundle/vim-lawrencium"]
+	path = bundle/vim-lawrencium
 	url = https://github.com/ludovicchabant/vim-lawrencium.git
 	ignore = dirty
 [submodule "bundle/vim-airline"]
