@@ -295,7 +295,10 @@ imap <C-K> <c-o>:pyf /home/mac/bin/clang-format.py<cr>
 " set the color scheme
 set background=dark
 "colorscheme desert256
-colorscheme solarized
+"colorscheme solarized
+"colorscheme Tomorrow
+"colorscheme base16-default
+colorscheme base16-solarized
 
 " ditaa support
 au BufRead,BufNewFile *.ditaa set ft=ditaa

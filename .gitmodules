@@ -58,4 +58,8 @@
 	path = bundle/vim-sleuth
 	url = git://github.com/tpope/vim-sleuth.git
 	ignore = dirty
+[submodule "bundle/base16-vim"]
+	path = bundle/base16-vim
+	url = git://github.com/chriskempson/base16-vim.git	
+	ignore = dirty
 
