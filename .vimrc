@@ -23,6 +23,8 @@ filetype plugin indent on
 
 " Enable syntax highlighting
 syntax on
+" 
+set switchbuf=useopen,split
 
 " status line configuration
 function! FileSize()
@@ -277,14 +279,16 @@ function! BuildCurrent(...)
 	cwindow
 endfunction "BuildCurrent
 
-map <F7> :call BuildCurrent()<CR>
-imap <F7> :call BuildCurrent()<CR>
+command! -nargs=? Build call BuildCurrent(<f-args>)
+
+map <F7> :call BuildCurrent()!<CR>
+imap <F7> :call BuildCurrent()!<CR>
 
 "autocmd FileType qf wincmd L
 
 " highlight tabs in code
-highlight ExtraWhitespace ctermbg=06
-match ExtraWhitespace /\t\+/
+"highlight ExtraWhitespace ctermbg=06
+"match ExtraWhitespace /\t\+/
 
 " clever tabs END
 
@@ -295,10 +299,11 @@ imap <C-K> <c-o>:pyf /home/mac/bin/clang-format.py<cr>
 " set the color scheme
 set background=dark
 "colorscheme desert256
-"colorscheme solarized
-"colorscheme Tomorrow
+colorscheme solarized
+"colorscheme Tomorrow-Night
 "colorscheme base16-default
-colorscheme base16-solarized
+"colorscheme base16-solarized-dark
+"colorscheme base16-tomorrow-night
 
 " ditaa support
 au BufRead,BufNewFile *.ditaa set ft=ditaa
