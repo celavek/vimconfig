@@ -23,7 +23,7 @@ filetype plugin indent on
 
 " Enable syntax highlighting
 syntax on
-" 
+"
 set switchbuf=useopen,split
 
 " status line configuration
@@ -174,26 +174,26 @@ set softtabstop=0
 
 "kernel devel
 function! SetKernelTabs()
-	set tabstop=8
-	set shiftwidth=8
-	set softtabstop=8
-	set noexpandtab
+    set tabstop=8
+    set shiftwidth=8
+    set softtabstop=8
+    set noexpandtab
 endfunction
 
 "SK devel
 function! SetDefaultTabs()
-	set tabstop=4
-	set shiftwidth=4
-	set softtabstop=4
-	set noexpandtab
+    set tabstop=4
+    set shiftwidth=4
+    set softtabstop=4
+    set noexpandtab
 endfunction
 
 "DSSDK devel
 function! SetDSTabs()
-	set expandtab
-	set tabstop=4
-	set shiftwidth=4
-	set softtabstop=4
+    set expandtab
+    set tabstop=4
+    set shiftwidth=4
+    set softtabstop=4
 endfunction
 
 "autocmd BufNewFile,BufEnter *.{c},*.{h} call SetKernelTabs()
@@ -261,22 +261,23 @@ command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q
 
 " build script invocation
 function! BuildCurrent(...)
-	let wd = getcwd()
-	let b_args = a:000
-	let script_args = ""
-	if empty(b_args)
-		let script_args = "Linux x86_64 clang Release"
-	else
-		let script_args = join(b_args)
-	endif
-	silent !clear
-	echom wd
-	echom script_args
-	let l:command = '! ./build.sh ' . script_args
-	let l:out = system(l:command)
-	cexpr l:out
-	caddexpr ""
-	cwindow
+    let wd = getcwd()
+    let b_args = a:000
+    let script_args = ""
+    if empty(b_args)
+	let script_args = "Linux x86_64 clang Release"
+    else
+	let script_args = join(b_args)
+    endif
+
+    silent !clear
+    echom wd
+    echom script_args
+    let l:command = '! ./build.sh ' . script_args
+    let l:out = system(l:command)
+    cexpr l:out
+    caddexpr ""
+    cwindow
 endfunction "BuildCurrent
 
 command! -nargs=? Build call BuildCurrent(<f-args>)
@@ -448,3 +449,9 @@ let g:airline#extensions#whitespace#enabled = 1
 "fonts
 let g:airline_powerline_fonts = 1
 
+"---------
+" Mesonic
+"--------
+let b:meson_command = 'meson'
+let b:meson_ninja_command = 'ninja'
+         
