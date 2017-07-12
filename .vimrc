@@ -236,7 +236,7 @@ function! Indenting(indent, what, cols)
     let result = substitute(a:indent, spccol, '\t', 'g')
     let result = substitute(result, ' \+\ze\t', '', 'g')
     if a:what == 1
-	let result = substitute(result, '\t', spccol, 'g')
+        let result = substitute(result, '\t', spccol, 'g')
     endif
     return result
 endfunction
@@ -265,9 +265,9 @@ function! BuildCurrent(...)
     let b_args = a:000
     let script_args = ""
     if empty(b_args)
-	let script_args = "Linux x86_64 clang Release"
+        let script_args = "Linux x86_64 clang Release"
     else
-	let script_args = join(b_args)
+        let script_args = join(b_args)
     endif
 
     silent !clear
@@ -294,8 +294,8 @@ imap <F7> :call BuildCurrent()!<CR>
 " clever tabs END
 
 " clang format
-map <C-K> :pyf /home/mac/bin/clang-format.py<cr>
-imap <C-K> <c-o>:pyf /home/mac/bin/clang-format.py<cr>
+map <C-K> :py3f /home/mac/bin/clang-format.py<cr>
+imap <C-K> <c-o>:py3f /home/mac/bin/clang-format.py<cr>
 
 " set the color scheme
 set background=dark
@@ -454,4 +454,4 @@ let g:airline_powerline_fonts = 1
 "--------
 let b:meson_command = 'meson'
 let b:meson_ninja_command = 'ninja'
-         
+
