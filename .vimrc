@@ -23,6 +23,8 @@ filetype plugin indent on
 
 " Enable syntax highlighting
 syntax on
+"
+set switchbuf=useopen,split
 
 " status line configuration
 function! FileSize()
@@ -172,26 +174,26 @@ set softtabstop=0
 
 "kernel devel
 function! SetKernelTabs()
-	set tabstop=8
-	set shiftwidth=8
-	set softtabstop=8
-	set noexpandtab
+    set tabstop=8
+    set shiftwidth=8
+    set softtabstop=8
+    set noexpandtab
 endfunction
 
 "SK devel
 function! SetDefaultTabs()
-	set tabstop=4
-	set shiftwidth=4
-	set softtabstop=4
-	set noexpandtab
+    set tabstop=4
+    set shiftwidth=4
+    set softtabstop=4
+    set noexpandtab
 endfunction
 
 "DSSDK devel
 function! SetDSTabs()
-	set expandtab
-	set tabstop=4
-	set shiftwidth=4
-	set softtabstop=4
+    set expandtab
+    set tabstop=4
+    set shiftwidth=4
+    set softtabstop=4
 endfunction
 
 "autocmd BufNewFile,BufEnter *.{c},*.{h} call SetKernelTabs()
@@ -234,7 +236,7 @@ function! Indenting(indent, what, cols)
     let result = substitute(a:indent, spccol, '\t', 'g')
     let result = substitute(result, ' \+\ze\t', '', 'g')
     if a:what == 1
-	let result = substitute(result, '\t', spccol, 'g')
+        let result = substitute(result, '\t', spccol, 'g')
     endif
     return result
 endfunction
@@ -259,46 +261,50 @@ command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q
 
 " build script invocation
 function! BuildCurrent(...)
-	let wd = getcwd()
-	let b_args = a:000
-	let script_args = ""
-	if empty(b_args)
-		let script_args = "Linux x86_64 clang Release"
-	else
-		let script_args = join(b_args)
-	endif
-	silent !clear
-	echom wd
-	echom script_args
-	let l:command = '! ./build.sh ' . script_args
-	let l:out = system(l:command)
-	cexpr l:out
-	caddexpr ""
-	cwindow
+    let wd = getcwd()
+    let b_args = a:000
+    let script_args = ""
+    if empty(b_args)
+        let script_args = "Linux x86_64 clang Release"
+    else
+        let script_args = join(b_args)
+    endif
+
+    silent !clear
+    echom wd
+    echom script_args
+    let l:command = '! ./build.sh ' . script_args
+    let l:out = system(l:command)
+    cexpr l:out
+    caddexpr ""
+    cwindow
 endfunction "BuildCurrent
 
-map <F7> :call BuildCurrent()<CR>
-imap <F7> :call BuildCurrent()<CR>
+command! -nargs=? Build call BuildCurrent(<f-args>)
+
+map <F7> :call BuildCurrent()!<CR>
+imap <F7> :call BuildCurrent()!<CR>
 
 "autocmd FileType qf wincmd L
 
 " highlight tabs in code
-highlight ExtraWhitespace ctermbg=06
-match ExtraWhitespace /\t\+/
+"highlight ExtraWhitespace ctermbg=06
+"match ExtraWhitespace /\t\+/
 
 " clever tabs END
 
 " clang format
-map <C-K> :pyf /home/mac/bin/clang-format.py<cr>
-imap <C-K> <c-o>:pyf /home/mac/bin/clang-format.py<cr>
+map <C-K> :py3f /home/mac/bin/clang-format.py<cr>
+imap <C-K> <c-o>:py3f /home/mac/bin/clang-format.py<cr>
 
 " set the color scheme
 set background=dark
 "colorscheme desert256
-"colorscheme solarized
-"colorscheme Tomorrow
+colorscheme solarized
+"colorscheme Tomorrow-Night
 "colorscheme base16-default
-colorscheme base16-solarized
+"colorscheme base16-solarized-dark
+"colorscheme base16-tomorrow-night
 
 " ditaa support
 au BufRead,BufNewFile *.ditaa set ft=ditaa
@@ -442,4 +448,10 @@ let g:airline#extensions#whitespace#enabled = 1
 
 "fonts
 let g:airline_powerline_fonts = 1
+
+"---------
+" Mesonic
+"--------
+let b:meson_command = 'meson'
+let b:meson_ninja_command = 'ninja'
 

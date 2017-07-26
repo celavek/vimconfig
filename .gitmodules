@@ -2,10 +2,12 @@
 	path = bundle/pathogen
 	url = http://github.com/tpope/vim-pathogen.git
 	ignore = dirty
+	master = master
 [submodule "bundle/fugitive"]
 	path = bundle/fugitive
 	url = http://github.com/tpope/vim-fugitive.git
 	ignore = dirty
+	master = master
 [submodule "bundle/taglist"]
 	path = bundle/taglist
 	url = https://github.com/vim-scripts/taglist.vim.git
@@ -26,14 +28,17 @@
 	path = bundle/riv
 	url = https://github.com/Rykka/riv.vim
 	ignore = dirty
+	master = master
 [submodule "bundle/markdown"]
 	path = bundle/markdown
 	url = https://github.com/tpope/vim-markdown.git
 	ignore = dirty
+	master = master
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
 	ignore = dirty
+	master = master
 [submodule "bundle/IngoLibrary"]
 	path = bundle/IngoLibrary
 	url = https://github.com/vim-scripts/ingo-library.git
@@ -46,10 +51,12 @@
 	path = bundle/vim-lawrencium
 	url = https://github.com/ludovicchabant/vim-lawrencium.git
 	ignore = dirty
+	master = master
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
 	url = https://github.com/bling/vim-airline
 	ignore = dirty
+	master = master
 [submodule "bundle/vim-colors-solarized"]
 	path = bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
@@ -58,12 +65,27 @@
 	path = bundle/vim-sleuth
 	url = git://github.com/tpope/vim-sleuth.git
 	ignore = dirty
+	master = master
 [submodule "bundle/base16-vim"]
 	path = bundle/base16-vim
-	url = git://github.com/chriskempson/base16-vim.git	
+	url = git://github.com/chriskempson/base16-vim.git
 	ignore = dirty
+	master = master
 [submodule "bundle/linediff"]
 	path = bundle/linediff
 	url = git://github.com/AndrewRadev/linediff.vim.git
 	ignore = dirty
+	master = master
+
+[submodule "bundle/mesonic"]
+	path = bundle/mesonic
+	url = https://github.com/igankevich/mesonic.git
+	ignore = dirty
+	master = master
+
+[submodule "bundle/kotlin-vim"]
+	path = bundle/kotlin-vim
+	url = https://github.com/udalov/kotlin-vim
+	ignore = dirty
+	master = master
 
