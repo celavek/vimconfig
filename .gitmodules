@@ -62,4 +62,8 @@
 	path = bundle/base16-vim
 	url = git://github.com/chriskempson/base16-vim.git	
 	ignore = dirty
+[submodule "bundle/linediff"]
+	path = bundle/linediff
+	url = git://github.com/AndrewRadev/linediff.vim.git
+	ignore = dirty
 
