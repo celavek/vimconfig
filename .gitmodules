@@ -76,13 +76,11 @@
 	url = git://github.com/AndrewRadev/linediff.vim.git
 	ignore = dirty
 	master = master
-
 [submodule "bundle/mesonic"]
 	path = bundle/mesonic
 	url = https://github.com/igankevich/mesonic.git
 	ignore = dirty
 	master = master
-
 [submodule "bundle/kotlin-vim"]
 	path = bundle/kotlin-vim
 	url = https://github.com/udalov/kotlin-vim
